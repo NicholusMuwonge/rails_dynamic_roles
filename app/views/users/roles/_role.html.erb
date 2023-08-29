@@ -1,0 +1,23 @@
+<div id="<%= dom_id role %>">
+  <p>
+    <strong>Name:</strong>
+    <%= role.name %>
+  </p>
+
+  <p>
+    <strong>Permissions:</strong>
+    <% role.permissions.each do |permission| %>
+    <ul>
+      <li>
+        <%= permission.description %>
+      </li>
+    </ul>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Created At:</strong>
+    <%= role.created_at %>
+  </p>
+
+</div>

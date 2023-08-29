@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Profile</h1>
+
+<div>
+  <span>Logged In User Email: <%= current_user.email %></span>
+  <br/>
+  <span>Permissions: <br/>
+    <% current_user&.permissions.each do |permission| %>
+      <ul>
+        <li><%= permission&.description %></li>
+      </ul>
+    <% end %>
+  </span>
+  <span>Roles: <br/>
+    <% current_user&.roles.each do |role| %>
+      <ul>
+        <li><%= role&.name&.humanize %></li>
+      </ul>
+    <% end %>
+  </span>
+</div>
+
+<hr />
+<h1>Users</h1>
+<div id="users">
+  <% if policy(current_user).index? %>
+    <% @users.each do |user| %>
+      <%= render user %>
+      <p>
+        <%= link_to "Show this user", users_user_path(user) %>
+      </p>
+      <hr />
+    <% end %>
+  <% else %>
+      <div>You're not authorised to view the users</div>
+  <% end %>
+</div>
+
+<%= link_to "Invite New User", new_user_invitation_path %>
+<%= link_to "Create New Role", new_users_role_path %>
+<%= link_to "Sign Out User", destroy_user_session_path %>
